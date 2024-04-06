@@ -18,16 +18,21 @@ public class MainApp extends Application {
 	
 	
 	public MainApp() {
-		//Adiciona alguns exemplos
-		productData.add(new Product("Cronos","Cronos Old", "Cronos 6001‑A", "Este modelo monofásico atende as necessidades das concessionárias de energia elétrica. É um medidor compacto com dimensões compatíveis as instalações e equipamentos de calibração já existentes. Fabricado com materiais de alta tecnologia e modernas técnicas de produção, o medidor eletrônico Cronos 6001-A, é uma solução totalmente nacional para medição de elétrica, com preço extremamente competitivo. Confira as vantagens!", "https://www.eletraenergy.com.br/wp-content/uploads/2022/09/CRONOS-6001-A-2.png"));
-		
-		productData.add(new Product("Cronos","Cronos New", "Cronos 6001‑A", "Este modelo monofásico atende as necessidades das concessionárias de energia elétrica. É um medidor compacto com dimensões compatíveis as instalações e equipamentos de calibração já existentes. Fabricado com materiais de alta tecnologia e modernas técnicas de produção, o medidor eletrônico Cronos 6001-A, é uma solução totalmente nacional para medição de elétrica, com preço extremamente competitivo. Confira as vantagens!", "https://www.eletraenergy.com.br/wp-content/uploads/2022/09/CRONOS-6001-A-2.png"));
-
-		productData.add(new Product("Ares","Ares TB", "ARES 7021", "O medidor ARES 7021 auxilia as concessionárias de energia a obter informações referentes ao consumo de energia de seus clientes. Projetado para operar em redes monofásicas a dois fios, registrar o consumo de energia ativa e reativa nos quatro quadrantes e atender à regulamentação normativa da ANEEL quanto a Tarifa Branca", "https://www.eletraenergy.com.br/wp-content/uploads/2022/09/ARES-7021.png"));
-		productData.add(new Product("Ares","Ares TB", "ARES 7021", "O medidor ARES 7021 auxilia as concessionárias de energia a obter informações referentes ao consumo de energia de seus clientes. Projetado para operar em redes monofásicas a dois fios, registrar o consumo de energia ativa e reativa nos quatro quadrantes e atender à regulamentação normativa da ANEEL quanto a Tarifa Branca", "https://www.eletraenergy.com.br/wp-content/uploads/2022/09/ARES-7021.png"));
-		productData.add(new Product("Ares","Ares TB", "ARES 7021", "O medidor ARES 7021 auxilia as concessionárias de energia a obter informações referentes ao consumo de energia de seus clientes. Projetado para operar em redes monofásicas a dois fios, registrar o consumo de energia ativa e reativa nos quatro quadrantes e atender à regulamentação normativa da ANEEL quanto a Tarifa Branca", "https://www.eletraenergy.com.br/wp-content/uploads/2022/09/ARES-7021.png"));
-		productData.add(new Product("Ares","Ares TB", "ARES 7021", "O medidor ARES 7021 auxilia as concessionárias de energia a obter informações referentes ao consumo de energia de seus clientes. Projetado para operar em redes monofásicas a dois fios, registrar o consumo de energia ativa e reativa nos quatro quadrantes e atender à regulamentação normativa da ANEEL quanto a Tarifa Branca", "https://www.eletraenergy.com.br/wp-content/uploads/2022/09/ARES-7021.png"));
-
+		productData.add(new Product("Cronos","Cronos Old", "Cronos 6001‑A", "Este modelo monofásico atende as necessidades das concessionárias de energia elétrica. É um medidor compacto com dimensões compatíveis as instalações e equipamentos de calibração já existentes. Fabricado com materiais de alta tecnologia e modernas técnicas de produção, o medidor eletrônico Cronos 6001-A, é uma solução totalmente nacional para medição de elétrica, com preço extremamente competitivo.", "https://www.eletraenergy.com.br/wp-content/uploads/2022/09/CRONOS-6001-A-2.png"));
+		productData.add(new Product("Cronos", "Cronos Old", "Cronos 6003", " ", " "));
+		productData.add(new Product("Cronos", "Cronos Old", "Cronos 7023", " ", " "));
+		productData.add(new Product("Cronos", "Cronos L", "Cronos 6021L", " ", " "));
+		productData.add(new Product("Cronos", "Cronos L", "Cronos 7023L", " ", " "));
+		productData.add(new Product("Cronos", "Cronos NG", "Cronos 6001‑NG", " ", " "));
+		productData.add(new Product("Cronos", "Cronos NG", "Cronos 6003‑NG", " ", " "));
+		productData.add(new Product("Cronos", "Cronos NG", "Cronos 6021‑NG", " ", " "));
+		productData.add(new Product("Cronos", "Cronos NG", "Cronos 6031‑NG", " ", " "));
+		productData.add(new Product("Cronos", "Cronos NG", "Cronos 7021‑NG", " ", " "));
+		productData.add(new Product("Cronos", "Cronos NG", "Cronos 7023‑NG", " ", " "));
+		productData.add(new Product("Ares", "Ares TB", "ARES 7021", "O medidor ARES 7021 auxilia as concessionárias de energia a obter informações referentes ao consumo de energia de seus clientes. Projetado para operar em redes monofásicas a dois fios, registrar o consumo de energia ativa e reativa nos quatro quadrantes e atender à regulamentação normativa da ANEEL quanto a Tarifa Branca", "https://www.eletraenergy.com.br/wp-content/uploads/2022/09/ARES-7021.png"));
+		productData.add(new Product("Ares", "Ares TB", "ARES 7031", " ", " "));
+		productData.add(new Product("Ares", "Ares TB", "ARES 7023", " ", " "));
+		productData.add(new Product("Ares", "Ares TB", "ARES 7021", " ", " "));		
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package com.sergiofah.integracao.view;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.sergiofah.integracao.model.Product;
@@ -9,15 +10,22 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class ProductPageController {
 	
 	private ArrayList<Product> productData;
 	private String selectedLine;
 	
+	
+	@FXML
+	private AnchorPane modelDetailsAnchorPane;
 	
 	@FXML
 	private ComboBox<String> linesComboBox;
@@ -27,7 +35,15 @@ public class ProductPageController {
 	
 	@FXML
 	private TreeView<String> modelsTreeView;
-	private TreeItem newNode;
+
+	@FXML
+	private Label productNameLabel;
+	
+	@FXML
+	private Label productDescLabel;
+	
+	@FXML
+	private ImageView productImageView;
 	
 	@FXML
 	private void OnClickComboBox(ActionEvent evt) {
@@ -37,7 +53,7 @@ public class ProductPageController {
 		modelsTitledPane.setExpanded(true);
 		}
 	
-	public void populateTreeView() {
+	private void populateTreeView() {
 		
 		//gera uma lista de categorias distinta
     	ArrayList<String> categoryList = (ArrayList<String>) productData.stream().
@@ -70,12 +86,31 @@ public class ProductPageController {
     	selectionTreeViewHandler();
 	}
 	
-	public void selectionTreeViewHandler() {
+	private void selectionTreeViewHandler() {
         modelsTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if ((newValue != null)&&(newValue.isLeaf())) {
-                System.out.println("Item selecionado: " + newValue.getValue());
+            	String selectedModel = newValue.getValue();
+            	
+            	Optional<Product> selectedProduct = productData.stream()
+                         .filter(p -> p.getModel().equals(selectedModel))
+                         .findFirst();
+            	//Product selectedProduct = productData.get(productData.indexOf(newValue.getValue()));
+            	populateModelDetails(selectedProduct.get());            
             }
         });
+	}
+	
+	public void populateModelDetails(Product p) {
+		
+		//System.out.println(p.getModel());
+		//System.out.println(p.getCategory());
+		productNameLabel.setText(p.getModel());
+		productDescLabel.setText(p.getDescr());
+		Image image = new Image(p.getImgUrl());
+		productImageView.setImage(image);
+
+    	modelDetailsAnchorPane.setVisible(true);
+
 	}
 	
     public void populateComboBox() {
