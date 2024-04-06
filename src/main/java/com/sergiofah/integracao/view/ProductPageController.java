@@ -20,9 +20,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class ProductPageController {
 	
-	private ArrayList<Product> productData;
+	private ArrayList<Product> productData; 
 	private String selectedLine;
-	
 	
 	@FXML
 	private AnchorPane modelDetailsAnchorPane;
@@ -100,14 +99,30 @@ public class ProductPageController {
         });
 	}
 	
+	//Carregar os campos com as informações do produto
 	public void populateModelDetails(Product p) {
-		
-		//System.out.println(p.getModel());
-		//System.out.println(p.getCategory());
+		Image loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
 		productNameLabel.setText(p.getModel());
 		productDescLabel.setText(p.getDescr());
-		Image image = new Image(p.getImgUrl());
-		productImageView.setImage(image);
+		
+		//determina como imagem de loading
+		productImageView.setImage(loading);
+	
+		//thread para carregamento da imagem em paralelo
+        Thread loadImage = new Thread(() -> {
+    		try {
+				Image image = new Image(p.getImgUrl());
+				productImageView.setImage(image);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        });
+        
+        if(loadImage.isAlive()) {
+        	loadImage.interrupt();
+        }
+        
+        loadImage.start();
 
     	modelDetailsAnchorPane.setVisible(true);
 
