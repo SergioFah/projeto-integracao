@@ -9,7 +9,7 @@ public class Product {
 	private String imgUrl; // URL da imagem do produto
 	
 
-	public Product(String line, String model, String category, String descr, String imgUrl) {
+	public Product(String line, String category, String model, String descr, String imgUrl) {
 		this.line = line;
 		this.category = category;
 		this.model = model;

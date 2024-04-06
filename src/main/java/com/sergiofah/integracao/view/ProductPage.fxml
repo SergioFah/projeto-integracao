@@ -35,19 +35,19 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="linesComboBox" layoutX="203.0" layoutY="30.0" prefWidth="150.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
+                                          <ComboBox fx:id="linesComboBox" layoutX="203.0" layoutY="30.0" onAction="#OnClickComboBox" prefWidth="150.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
                                        </children>
                                     </AnchorPane>
                                  </content>
                               </TitledPane>
-                            <TitledPane text="Modelos">
+                            <TitledPane fx:id="modelsTitledPane" disable="true" expanded="false" text="Modelos">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                                  <content>
                                     <AnchorPane>
                                        <children>
-                                          <TreeView layoutX="208.0" layoutY="46.4" prefHeight="354.0" prefWidth="245.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
+                                          <TreeView fx:id="modelsTreeView" layoutX="208.0" layoutY="46.4" prefHeight="354.0" prefWidth="245.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
                                           <Label text="Selecione um Modelo" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="18.0">
                                              <font>
                                                 <Font size="18.0" />
