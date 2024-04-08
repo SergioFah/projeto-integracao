@@ -50,13 +50,22 @@ public class ProductPageController {
 		populateTreeView();
 		modelsTitledPane.setDisable(false);
 		modelsTitledPane.setExpanded(true);
-		}
+	}
+	
+    public void populateComboBox(){
+    	//gera uma lista de linhas distinta
+    	ArrayList<String> lineList = (ArrayList<String>) productData.stream().
+    			map(Product::getLine).
+    			distinct().
+    			collect(Collectors.toList());
+    	
+    	linesComboBox.setItems(FXCollections.observableArrayList(lineList));
+    }
 	
 	private void populateTreeView() {
 		
 		//gera uma lista de categorias distinta
-    	ArrayList<String> categoryList = (ArrayList<String>) productData.
-    			stream().
+    	ArrayList<String> categoryList = (ArrayList<String>) productData.stream().
     			filter(s -> s.getLine()==selectedLine).
     			map(Product::getCategory).
     			distinct().
@@ -70,7 +79,7 @@ public class ProductPageController {
     
 
     	//preenche a treeView
-    	for(String c: categoryList) {
+    	for(String c: categoryList){
     		TreeItem<String> newCategory = new TreeItem<String>(c); 
     		rootItem.getChildren().add(newCategory);
     		for(Product p: productData) {
@@ -79,12 +88,10 @@ public class ProductPageController {
         		}	
         	}
     	}
-    	
-    	
-    	selectionTreeViewHandler();
+    	selectionTreeViewHandler(); 
 	}
-	
-	private void selectionTreeViewHandler() {
+	//Selecionar o elemento que foi escolhido e chamar a função de preencher os campos
+	private void selectionTreeViewHandler(){
         modelsTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if ((newValue != null)&&(newValue.isLeaf())) {
             	String selectedModel = newValue.getValue();
@@ -97,8 +104,8 @@ public class ProductPageController {
         });
 	}
 	
-	//Carrega os campos com as informações do produto
-	public void populateModelDetails(Product p) {
+	//Preenche os campos com as informações do produto
+	public void populateModelDetails(Product p){
 		Image loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
 		productNameLabel.setText(p.getModel());
 		productDescLabel.setText(p.getDescr());
@@ -107,7 +114,7 @@ public class ProductPageController {
     	modelDetailsAnchorPane.setVisible(true);
 
 	
-		//thread para carregamento da imagem em paralelo
+		//Thread para carregamento da imagem em paralelo
         Thread loadImage = new Thread(() -> {
     		try {
 				Image image = new Image(p.getImgUrl());
@@ -123,17 +130,6 @@ public class ProductPageController {
         
         loadImage.start();
 	}
-	
-    public void populateComboBox() {
-    	//gera uma lista de linhas distinta
-    	ArrayList<String> lineList = (ArrayList<String>) productData.
-    			stream().
-    			map(Product::getLine).
-    			distinct().
-    			collect(Collectors.toList());
-    	
-    	linesComboBox.setItems(FXCollections.observableArrayList(lineList));
-    }
     
 	public void setProductData(ArrayList<Product> productData) {
 		this.productData = productData;

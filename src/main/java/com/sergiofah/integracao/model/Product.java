@@ -17,7 +17,6 @@ public class Product {
 		this.imgUrl = imgUrl;
 	}
 
-	//getters e setters
 	public String getLine() {
 		return line;
 	}
