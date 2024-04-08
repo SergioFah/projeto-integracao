@@ -55,7 +55,8 @@ public class ProductPageController {
 	private void populateTreeView() {
 		
 		//gera uma lista de categorias distinta
-    	ArrayList<String> categoryList = (ArrayList<String>) productData.stream().
+    	ArrayList<String> categoryList = (ArrayList<String>) productData.
+    			stream().
     			filter(s -> s.getLine()==selectedLine).
     			map(Product::getCategory).
     			distinct().
@@ -104,9 +105,10 @@ public class ProductPageController {
 		Image loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
 		productNameLabel.setText(p.getModel());
 		productDescLabel.setText(p.getDescr());
-		
 		//determina como imagem de loading
 		productImageView.setImage(loading);
+    	modelDetailsAnchorPane.setVisible(true);
+
 	
 		//thread para carregamento da imagem em paralelo
         Thread loadImage = new Thread(() -> {
@@ -123,9 +125,6 @@ public class ProductPageController {
         }
         
         loadImage.start();
-
-    	modelDetailsAnchorPane.setVisible(true);
-
 	}
 	
     public void populateComboBox() {
