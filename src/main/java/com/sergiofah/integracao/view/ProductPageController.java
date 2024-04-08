@@ -62,9 +62,7 @@ public class ProductPageController {
     			distinct().
     			collect(Collectors.toList());
     	
-    	//cria o root
         TreeItem<String> rootItem = new TreeItem<>(selectedLine);
-        //seta o root
         modelsTreeView.setRoot(rootItem);
 		//desabilita a visão do root
     	modelsTreeView.setShowRoot(false);
@@ -94,13 +92,12 @@ public class ProductPageController {
             	Optional<Product> selectedProduct = productData.stream()
                          .filter(p -> p.getModel().equals(selectedModel))
                          .findFirst();
-            	//Product selectedProduct = productData.get(productData.indexOf(newValue.getValue()));
             	populateModelDetails(selectedProduct.get());            
             }
         });
 	}
 	
-	//Carregar os campos com as informações do produto
+	//Carrega os campos com as informações do produto
 	public void populateModelDetails(Product p) {
 		Image loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
 		productNameLabel.setText(p.getModel());
