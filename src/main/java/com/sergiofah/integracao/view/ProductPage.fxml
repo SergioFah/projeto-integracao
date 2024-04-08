@@ -61,7 +61,7 @@
                         </Accordion>
                      </children>
                   </AnchorPane>
-                <AnchorPane fx:id="modelDetailsAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane fx:id="modelDetailsAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" visible="false">
                      <children>
                         <Label fx:id="productNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="253.0" layoutY="64.0" text="Nome do Produto" textAlignment="CENTER" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0">
                            <font>

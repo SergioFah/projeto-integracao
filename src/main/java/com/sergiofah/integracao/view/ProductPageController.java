@@ -104,9 +104,10 @@ public class ProductPageController {
 		Image loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
 		productNameLabel.setText(p.getModel());
 		productDescLabel.setText(p.getDescr());
-		
 		//determina como imagem de loading
 		productImageView.setImage(loading);
+    	modelDetailsAnchorPane.setVisible(true);
+
 	
 		//thread para carregamento da imagem em paralelo
         Thread loadImage = new Thread(() -> {
@@ -123,9 +124,6 @@ public class ProductPageController {
         }
         
         loadImage.start();
-
-    	modelDetailsAnchorPane.setVisible(true);
-
 	}
 	
     public void populateComboBox() {
