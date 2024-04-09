@@ -13,8 +13,7 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
         try {
-        	
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/ProductPage.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProductPage.fxml"));
 			Parent parent = loader.load();
 			Scene scene = new Scene(parent);			
 			primaryStage.setTitle("Projeto de Integração - Etapa 01");
