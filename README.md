@@ -1,6 +1,6 @@
 # Projeto de Integração / Eletra Energy
 
-Projeto realizado com o objetivo de apresentar as tecnologias mais utilizadas e guiar quais atividades
+- Projeto realizado com o objetivo de apresentar as tecnologias mais utilizadas e guiar quais atividades
 deverão ser executadas na integração de novos colaboradores da equipe de software da P&D da
 Eletra Energy Solutions.
 --------------------------
