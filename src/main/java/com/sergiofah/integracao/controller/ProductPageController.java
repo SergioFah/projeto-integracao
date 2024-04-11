@@ -1,16 +1,14 @@
 package com.sergiofah.integracao.controller;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.sergiofah.controller.ProductController;
 import com.sergiofah.model.Category;
 import com.sergiofah.model.Line;
 import com.sergiofah.model.Product;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -25,9 +23,7 @@ public class ProductPageController {
 	
 	private String selectedLine;
 
-	Image loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
-
-	ProductController productController = new ProductController();
+	Image loading;
 
 	@FXML
 	private AnchorPane modelDetailsAnchorPane;
@@ -49,18 +45,24 @@ public class ProductPageController {
 	
 	@FXML
 	private ImageView productImageView;
-	
-	@FXML
+
+    public ProductPageController() {
+        loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
+    }
+
+    @FXML
 	private void initialize() {
 		populateComboBox();
 	}
 
 	public void populateComboBox(){
-		linesComboBox.setItems(FXCollections.observableArrayList(productController.getLines()));
+		linesComboBox.setItems(FXCollections.observableArrayList(Arrays.stream(Line.values()).
+				map(Line::getLine).
+				collect(Collectors.toList())));
 	}
 	
 	@FXML
-	private void OnClickComboBox(ActionEvent evt) {
+	private void OnClickComboBox() {
 		selectedLine = linesComboBox.getValue();
 		populateTreeView();
 		modelsTitledPane.setDisable(false);
@@ -69,7 +71,7 @@ public class ProductPageController {
 	
 	private void populateTreeView() {
 		
-    	List<Category> categoryList = productController.getCategories();
+    	List<Category> categoryList = Arrays.stream(Category.values()).collect(Collectors.toList());
     	
         TreeItem<String> rootItem = new TreeItem<>(selectedLine);
         modelsTreeView.setRoot(rootItem);
@@ -79,9 +81,9 @@ public class ProductPageController {
 			if (c.getLine().equals(selectedLine)) {
 				TreeItem<String> newCategory = new TreeItem<>(c.getCategory());
 				rootItem.getChildren().add(newCategory);
-				List<String> productsFromCategory = productController.getProductsFromCategory(c.getCategory());
-				for (String p : productsFromCategory) {
-					newCategory.getChildren().add(new TreeItem<String>(p));
+				List<Product> productsFromCategory = Product.getProductListFromCategory(c);
+				for (Product p : productsFromCategory) {
+					newCategory.getChildren().add(new TreeItem<>(p.getModel()));
 				}
 			}
 			selectionTreeViewHandler();
@@ -91,8 +93,7 @@ public class ProductPageController {
         modelsTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if ((newValue != null) && (newValue.isLeaf())) {
             	String selectedModel = newValue.getValue();
-            	Optional<Product> selectedProduct = productController.getProductFromModel(selectedModel);
-
+            	Optional<Product> selectedProduct = Product.getProductFromModel(selectedModel);
 				populateModelDetails(selectedProduct.get());
             }
         });
@@ -100,14 +101,14 @@ public class ProductPageController {
 	
 	public void populateModelDetails(Product p){
 		productNameLabel.setText(p.getModel());
-		productDescLabel.setText(p.getDescr());
+		productDescLabel.setText(p.getDesc());
 		productImageView.setImage(loading);
     	modelDetailsAnchorPane.setVisible(true);
 
 
         Thread loadImage = new Thread(() -> {
     		try {
-				Image image = new Image(p.getImgUrl());
+				Image image = new Image(p.getImageUrl());
 				productImageView.setImage(image);
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -2,7 +2,6 @@ package com.sergiofah.integracao;
 
 import java.io.IOException;
 
-import com.sergiofah.controller.ProductController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
