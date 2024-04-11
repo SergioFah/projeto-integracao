@@ -1,12 +1,9 @@
 package com.sergiofah.integracao.controller;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.sergiofah.model.Category;
-import com.sergiofah.model.Line;
 import com.sergiofah.model.Product;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -56,9 +53,7 @@ public class ProductPageController {
 	}
 
 	public void populateComboBox(){
-		linesComboBox.setItems(FXCollections.observableArrayList(Arrays.stream(Line.values()).
-				map(Line::getLine).
-				collect(Collectors.toList())));
+		linesComboBox.setItems(FXCollections.observableArrayList(Product.getLines()));
 	}
 	
 	@FXML
@@ -71,8 +66,8 @@ public class ProductPageController {
 	
 	private void populateTreeView() {
 		
-    	List<Category> categoryList = Arrays.stream(Category.values()).collect(Collectors.toList());
-    	
+    	List<Category> categoryList = Product.getCategories();
+
         TreeItem<String> rootItem = new TreeItem<>(selectedLine);
         modelsTreeView.setRoot(rootItem);
         modelsTreeView.setShowRoot(false);
@@ -103,7 +98,7 @@ public class ProductPageController {
 		productNameLabel.setText(p.getModel());
 		productDescLabel.setText(p.getDesc());
 		productImageView.setImage(loading);
-    	modelDetailsAnchorPane.setVisible(true);
+		modelDetailsAnchorPane.setVisible(true);
 
 
         Thread loadImage = new Thread(() -> {
