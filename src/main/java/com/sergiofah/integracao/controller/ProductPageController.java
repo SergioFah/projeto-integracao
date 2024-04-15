@@ -3,6 +3,7 @@ package com.sergiofah.integracao.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.sergiofah.controller.ProductDAO;
 import com.sergiofah.model.Category;
 import com.sergiofah.model.Product;
 import javafx.collections.FXCollections;
@@ -19,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 public class ProductPageController {
 	
 	private String selectedLine;
+
+	private ProductDAO productDAO;
 
 	Image loading;
 
@@ -49,11 +52,12 @@ public class ProductPageController {
 
     @FXML
 	private void initialize() {
+		productDAO = new ProductDAO();
 		populateComboBox();
 	}
 
 	public void populateComboBox(){
-		linesComboBox.setItems(FXCollections.observableArrayList(Product.getLines()));
+		linesComboBox.setItems(FXCollections.observableArrayList(productDAO.getLines()));
 	}
 	
 	@FXML
@@ -66,20 +70,18 @@ public class ProductPageController {
 	
 	private void populateTreeView() {
 		
-    	List<Category> categoryList = Product.getCategories();
+    	List<Category> categoryList = productDAO.getCategoriesFromLine(selectedLine);
 
         TreeItem<String> rootItem = new TreeItem<>(selectedLine);
         modelsTreeView.setRoot(rootItem);
         modelsTreeView.setShowRoot(false);
     
     	for(Category c: categoryList) {
-			if (c.getLine().equals(selectedLine)) {
-				TreeItem<String> newCategory = new TreeItem<>(c.getCategory());
-				rootItem.getChildren().add(newCategory);
-				List<Product> productsFromCategory = Product.getProductListFromCategory(c);
-				for (Product p : productsFromCategory) {
-					newCategory.getChildren().add(new TreeItem<>(p.getModel()));
-				}
+			TreeItem<String> newCategory = new TreeItem<>(c.getCategory());
+			rootItem.getChildren().add(newCategory);
+			List<Product> productsFromCategory = productDAO.getProductListFromCategory(c);
+			for (Product p : productsFromCategory) {
+				newCategory.getChildren().add(new TreeItem<>(p.getModel()));
 			}
 			selectionTreeViewHandler();
 		}
@@ -88,7 +90,7 @@ public class ProductPageController {
         modelsTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if ((newValue != null) && (newValue.isLeaf())) {
             	String selectedModel = newValue.getValue();
-            	Optional<Product> selectedProduct = Product.getProductFromModel(selectedModel);
+            	Optional<Product> selectedProduct = productDAO.getProductFromModel(selectedModel);
 				populateModelDetails(selectedProduct.get());
             }
         });
@@ -96,7 +98,7 @@ public class ProductPageController {
 	
 	public void populateModelDetails(Product p){
 		productNameLabel.setText(p.getModel());
-		productDescLabel.setText(p.getDesc());
+		productDescLabel.setText(p.getDescription());
 		productImageView.setImage(loading);
 		modelDetailsAnchorPane.setVisible(true);
 
