@@ -5,11 +5,9 @@
   <version>2.0-SNAPSHOT</version>
   <name>projeto-integracao</name>
   <description>Projeto de Integracao / Eletra Energy</description>
-  
   <organization>
 	<name>SergioFah</name>
   </organization>
-  
     <!-- Dependência do Back -->
 	<dependencies>
         <dependency>
@@ -19,7 +17,6 @@
         </dependency>
 	</dependencies>
 	<build>
-		<!-- Plugin de compilação do JavaFX -->
 		<plugins>
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -31,12 +28,31 @@
                 </configuration>
             </plugin>
 			<plugin>
-				<groupId>com.zenjava</groupId>
-	    		<artifactId>javafx-maven-plugin</artifactId>
-	    		<version>8.1.2</version>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.8.0</version>
 	    		<configuration>
 	    			<mainClass>com.sergiofah.integracao.MainApp</mainClass>
+                    <nativeReleaseVersion>2.0</nativeReleaseVersion>
+                    <appName>Projeto Integracao</appName>
 	    		</configuration>
+
+                <executions>
+                    <execution>
+                        <id>create-jfxjar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-native</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-native</goal>
+                        </goals>
+                    </execution>
+                </executions>
 			</plugin>
 		</plugins>
 	</build>
