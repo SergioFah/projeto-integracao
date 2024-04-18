@@ -2,7 +2,6 @@ package com.sergiofah.integracao;
 
 import java.io.IOException;
 
-import com.sergiofah.controller.ProductController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +16,7 @@ public class MainApp extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProductPage.fxml"));
 			Parent parent = loader.load();
 			Scene scene = new Scene(parent);			
-			primaryStage.setTitle("Projeto de Integração - Etapa 02");
+			primaryStage.setTitle("Projeto de Integração - Etapa 03");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {
