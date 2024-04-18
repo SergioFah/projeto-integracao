@@ -21,11 +21,10 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=C:\projeto-integracao-frontend\src\
-WizardImageFile=C:\projeto-integracao-frontend\src\main\deploy\package\windows\wizard-2.bmp
-WizardSmallImageFile=C:\projeto-integracao-frontend\src\main\deploy\package\windows\wizard.bmp
+WizardImageFile=Projeto Integracao-setup-icon.bmp
+WizardSmallImageFile=Projeto Integracao-setup-icon.bmp
 OutputBaseFilename=projeto-integracao-setup
-SetupIconFile=C:\projeto-integracao-frontend\src\main\deploy\package\windows\Projeto Integracao.ico
+SetupIconFile=Projeto Integracao\Projeto Integracao.ico
 Compression=lzma
 SolidCompression=yes
 
