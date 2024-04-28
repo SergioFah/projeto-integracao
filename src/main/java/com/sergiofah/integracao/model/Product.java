@@ -1,12 +1,6 @@
 
 package com.sergiofah.integracao.model;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import javax.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -34,8 +28,6 @@ public class Product {
     private String description;
     @JsonProperty("imageUrl")
     private String imageUrl;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("id")
     public Long getId() {
@@ -62,11 +54,6 @@ public class Product {
         this.line = line;
     }
 
-    public Product withLine(Line line) {
-        this.line = line;
-        return this;
-    }
-
     @JsonProperty("category")
     public Category getCategory() {
         return category;
@@ -75,11 +62,6 @@ public class Product {
     @JsonProperty("category")
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public Product withCategory(Category category) {
-        this.category = category;
-        return this;
     }
 
     @JsonProperty("model")
@@ -92,11 +74,6 @@ public class Product {
         this.model = model;
     }
 
-    public Product withModel(String model) {
-        this.model = model;
-        return this;
-    }
-
     @JsonProperty("description")
     public String getDescription() {
         return description;
@@ -107,10 +84,6 @@ public class Product {
         this.description = description;
     }
 
-    public Product withDescription(String description) {
-        this.description = description;
-        return this;
-    }
 
     @JsonProperty("imageUrl")
     public String getImageUrl() {
@@ -122,23 +95,4 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public Product withImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-        return this;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
-    public Product withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
-    }
 }

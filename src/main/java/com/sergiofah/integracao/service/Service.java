@@ -20,7 +20,6 @@ public class Service {
                 .build();
     }
 
-
     public boolean getServerStatus(){
         try {
             webClient
