@@ -24,7 +24,7 @@ public class Service {
         try {
             webClient
                     .get()
-                    .uri("/line")
+                    .uri("/lines")
                     .retrieve().bodyToMono(String.class).block();
             return true;
         } catch (Exception e) {
@@ -35,7 +35,7 @@ public class Service {
     public List<Line> getLines() {
         return webClient
                 .get()
-                .uri("/line")
+                .uri("/lines")
                 .retrieve()
                 .bodyToFlux(Line.class)
                 .collectList().block();
@@ -43,7 +43,7 @@ public class Service {
     public List<Category> getCategoriesFromLineId(Long id) {
         return webClient
                 .get()
-                .uri(uriBuilder -> uriBuilder.path("/category/{id}").build(id))
+                .uri(uriBuilder -> uriBuilder.path("/categories").queryParam("line","{id}").build(id))
                 .retrieve()
                 .bodyToFlux(Category.class)
                 .collectList().block();
@@ -52,7 +52,7 @@ public class Service {
     public List<Product> getProductsFromCategoryId(Long id) {
         return webClient
                 .get()
-                .uri(uriBuilder -> uriBuilder.path("/product/category/{id}").build(id))
+                .uri(uriBuilder -> uriBuilder.path("/products").queryParam("category","{id}").build(id))
                 .retrieve()
                 .bodyToFlux(Product.class)
                 .collectList().block();
@@ -61,7 +61,7 @@ public class Service {
     public Product getProductFromId(Long id) {
         return webClient
                 .get()
-                .uri(uriBuilder -> uriBuilder.path("/product/{id}").build(id))
+                .uri(uriBuilder -> uriBuilder.path("/products/{id}").build(id))
                 .retrieve()
                 .bodyToMono(Product.class)
                 .block();

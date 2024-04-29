@@ -27,7 +27,7 @@ public class MainApp extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ProductPage.fxml"));
 			Parent parent = loader.load();
 			Scene scene = new Scene(parent);			
-			primaryStage.setTitle("Projeto de Integração - Etapa 03");
+			primaryStage.setTitle("Projeto de Integração - Etapa 04");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (IOException e) {

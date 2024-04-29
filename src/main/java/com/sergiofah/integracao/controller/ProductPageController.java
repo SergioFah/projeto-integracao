@@ -100,6 +100,7 @@ public class ProductPageController {
 			rootItem.getChildren().add(newCategory);
 			List<Product> productsFromCategory = service.getProductsFromCategoryId(c.getId());
 			this.productList.addAll(productsFromCategory);
+
 			for (Product p : productsFromCategory) {
 				newCategory.getChildren().add(new TreeItem<>(p.getModel()));
 			}
