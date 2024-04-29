@@ -4,42 +4,20 @@
 deverão ser executadas na integração de novos colaboradores da equipe de software da P&D da
 Eletra Energy Solutions.
 --------------------------
-## Projeto 02 (v2.0)
+## Projeto 04 
 
-###### (Java 8 + Maven + JavaFX)
+###### (Maven + JavaFX + PostgreSQL + Spring Framework + Swagger)
 ### Objetivos:
-- Apresentar a arquitetura de projetos separados em Back‑end e Front‑end.
+Este projeto tem como objetivos:
+1. Apresentar a arquitetura de projeto onde a comunicação entre as entidades da aplicação é feita através de API REST.
+2. Entender como funciona uma API e tecnologias como Spring Boot, Swagger e Tomcat.
+3. Apresentar os conceitos de integração contínua
+4. Entender como criar uma build através do Teamcity para automatizar o deploy de uma aplicação.
 
-### Entregas esperadas:
-1. Dois repositórios um contendo o back‑end e o outro contendo o front‑end da aplicação javaFX
-   devidamente atualizados com TAGS do projeto 02.
-2. Disponibilização do arquivo .Jar da aplicação projeto de integração de acordo com as especificações
-   do projeto 02.
+### Entregas esperadas ao final do projeto 03:
+1. Repositórios front‑end e back‑end devidamente atualizados com TAGS do projeto 04.
+2. Build no teamcity do projeto de integraçao configurado para executar os testes unitários, gerar um instalador e disponibilizar automaticamente o instalador da aplicação.
+3. Disponibilizar o instalador da aplicação através do CI de acordo com especificacões
+4. Arquivo de backup do banco de dados
 
-### Especificação:
-1. Deverá ser criado um novo repositório Git e projeto java para o back‑end da aplicação.
-2. A partir do projeto 02 a plicação java desenvolvida no Projeto 01 deverá ser dividida em dois
-   projetos:
-
-   • Back‑end: Deverá funcionar como uma biblioteca para o projeto front‑end, onde serão disponibilizado
-   os dados da aplicação. Dessa forma todas as listas da Tabela de dados do projeto 01
-   deverão ser transferidas para o projeto back‑end.
-
-   • Front‑end: o front‑end da aplicação deverá se ajustado para consumir as dados partir do projeto
-   back‑end.
----------------------------------------------
-## Projeto 01 (v1.1)
-
-###### (Java 8 + Maven + JavaFX)
-### Objetivos:
-- Apresentar as tecnologias iniciais para o desenvolvimento de uma aplicação Java com interface
-javaFX.
-- Montar e instalar de maneira correta um ambiente de desenvolvimento java.
-- Montar um repositório Git e apresentar os conceitos do GitFlow
-- Criar uma aplicação com interface JavaFX
-
-### Entregas esperadas:
-- Ambiente de desenvolvimento configurado.
-- Repositório da aplicação JavaFX configurada de acordo com os padrões GitFlow e com Tag do Projeto01.
-- Disponibilização do .jar da aplicação de acordo com as especificações
 
