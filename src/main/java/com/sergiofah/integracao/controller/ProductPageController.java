@@ -110,7 +110,6 @@ public class ProductPageController {
 			}
 			selectionTreeViewHandler();
 		}
-
 	}
 
 	private void selectionTreeViewHandler() {
