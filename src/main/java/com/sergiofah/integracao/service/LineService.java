@@ -5,8 +5,14 @@ import com.sergiofah.integracao.model.LineDTO;
 import java.util.List;
 
 public class LineService {
+
+    private Service service;
+
+    public LineService() {
+        this.service = new Service();
+    }
+
     public List<LineDTO> getLines() {
-        Service service = new Service();
         return service.getWebClient()
                 .get()
                 .uri("/lines")
