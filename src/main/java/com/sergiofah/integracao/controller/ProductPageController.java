@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.sergiofah.integracao.model.Category;
-import com.sergiofah.integracao.model.Line;
-import com.sergiofah.integracao.model.Product;
+import com.sergiofah.integracao.model.CategoryDTO;
+import com.sergiofah.integracao.model.LineDTO;
+import com.sergiofah.integracao.model.ProductDTO;
+import com.sergiofah.integracao.service.CategoryService;
+import com.sergiofah.integracao.service.LineService;
+import com.sergiofah.integracao.service.ProductService;
 import com.sergiofah.integracao.service.Service;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -23,14 +26,8 @@ import javafx.scene.paint.Color;
 
 public class ProductPageController {
 
-	private Long selectedLineId;
-
-	private Service service;
-
 	@FXML
 	private Label serverStatus;
-
-	Image loading;
 
 	@FXML
 	private AnchorPane modelDetailsAnchorPane;
@@ -52,9 +49,14 @@ public class ProductPageController {
 	
 	@FXML
 	private ImageView productImageView;
-	private List<Line> lineList;
-	private List<Category> categoryList;
-	private List<Product> productList = new ArrayList<>();
+
+	private Image loading;
+
+	private Long selectedLineId;
+
+	private List<LineDTO> lineDTOList;
+	private List<CategoryDTO> categoryDTOList;
+	private List<ProductDTO> productDTOList = new ArrayList<>();
 
 	public ProductPageController() {
         loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
@@ -62,25 +64,26 @@ public class ProductPageController {
 
     @FXML
 	private void initialize() {
-		this.service = new Service();
-		if(service.getServerStatus()) {
-			this.lineList = service.getLines();
+		Service service = new Service();
+		LineService lineService = new LineService();
+		if (service.getServerStatus()) {
+			this.lineDTOList = lineService.getLines();
 			populateComboBox();
-		}else{
+		} else {
 			serverStatus.setText("Status: Server Offline");
 			serverStatus.setTextFill(Color.RED);
 		}
 	}
 
-	public void populateComboBox(){
-		linesComboBox.setItems(FXCollections.observableArrayList(lineList.stream().map(Line::getLine).collect(Collectors.toList())));
+	public void populateComboBox() {
+		linesComboBox.setItems(FXCollections.observableArrayList(lineDTOList.stream().map(LineDTO::getLine).collect(Collectors.toList())));
 	}
 	
 	@FXML
 	private void OnClickComboBox() {
-		selectedLineId = lineList.stream()
+		selectedLineId = lineDTOList.stream()
 				.filter(id -> id.getLine().equals(linesComboBox.getValue()))
-				.map(Line::getId)
+				.map(LineDTO::getId)
 				.findFirst()
 				.get();
 		populateTreeView();
@@ -89,19 +92,20 @@ public class ProductPageController {
 	}
 	
 	private void populateTreeView() {
-
-    	this.categoryList = service.getCategoriesFromLineId(selectedLineId);
+		CategoryService categoryService = new CategoryService();
+		ProductService productService = new ProductService();
+    	this.categoryDTOList = categoryService.getCategoriesFromLineId(selectedLineId);
 		TreeItem<String> rootItem = new TreeItem<>();
         modelsTreeView.setRoot(rootItem);
         modelsTreeView.setShowRoot(false);
 
-    	for(Category c: categoryList) {
+    	for (CategoryDTO c : categoryDTOList) {
 			TreeItem<String> newCategory = new TreeItem<>(c.getCategory());
 			rootItem.getChildren().add(newCategory);
-			List<Product> productsFromCategory = service.getProductsFromCategoryId(c.getId());
-			this.productList.addAll(productsFromCategory);
+			List<ProductDTO> productsFromCategory = productService.getProductsFromCategoryId(c.getId());
+			this.productDTOList.addAll(productsFromCategory);
 
-			for (Product p : productsFromCategory) {
+			for (ProductDTO p : productsFromCategory) {
 				newCategory.getChildren().add(new TreeItem<>(p.getModel()));
 			}
 			selectionTreeViewHandler();
@@ -109,18 +113,19 @@ public class ProductPageController {
 
 	}
 
-	private void selectionTreeViewHandler(){
-        modelsTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+	private void selectionTreeViewHandler() {
+		ProductService productService = new ProductService();
+		modelsTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if ((newValue != null) && (newValue.isLeaf())) {
             	String selectedModel = newValue.getValue();
-				Long productId = productList.stream().filter(p -> p.getModel().equals(selectedModel)).findFirst().get().getId();
-				Product selectedProduct = service.getProductFromId(productId);
-				populateModelDetails(selectedProduct);
+				Long productId = productDTOList.stream().filter(p -> p.getModel().equals(selectedModel)).findFirst().get().getId();
+				ProductDTO selectedProductDTO = productService.getProductFromId(productId);
+				populateModelDetails(selectedProductDTO);
             }
         });
 	}
 	
-	public void populateModelDetails(Product p){
+	public void populateModelDetails(ProductDTO p) {
 		productNameLabel.setText(p.getModel());
 		productDescLabel.setText(p.getDescription());
 		productImageView.setImage(loading);
@@ -136,7 +141,7 @@ public class ProductPageController {
 			}
         });
 
-        if(loadImage.isAlive()) {
+        if (loadImage.isAlive()) {
         	loadImage.interrupt();
         }
 
