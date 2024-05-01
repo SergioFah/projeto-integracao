@@ -23,7 +23,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
-
 public class ProductPageController {
 
 	@FXML
@@ -59,6 +58,7 @@ public class ProductPageController {
 	private LineService lineService;
 	private CategoryService categoryService;
 	private ProductService productService;
+
 	public ProductPageController() {
         loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
     }
