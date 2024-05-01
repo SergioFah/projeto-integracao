@@ -21,7 +21,4 @@ public class LineDTO {
     public void setLine(String line) {
         this.line = line;
     }
-
-
-
 }

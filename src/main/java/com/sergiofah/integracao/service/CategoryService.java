@@ -6,7 +6,9 @@ import java.util.List;
 
 public class CategoryService {
     public List<CategoryDTO> getCategoriesFromLineId(Long id) {
+
         Service service = new Service();
+
         return service.getWebClient()
                 .get()
                 .uri(uriBuilder -> uriBuilder.path("/categories").queryParam("line","{id}").build(id))
@@ -14,5 +16,4 @@ public class CategoryService {
                 .bodyToFlux(CategoryDTO.class)
                 .collectList().block();
     }
-
 }

@@ -5,7 +5,6 @@ import com.sergiofah.integracao.model.ProductDTO;
 import java.util.List;
 
 public class ProductService {
-
     public List<ProductDTO> getProductsFromCategoryId(Long id) {
         Service service = new Service();
         return service.getWebClient()

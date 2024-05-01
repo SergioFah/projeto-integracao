@@ -14,5 +14,4 @@ public class LineService {
                 .bodyToFlux(LineDTO.class)
                 .collectList().block();
     }
-
 }

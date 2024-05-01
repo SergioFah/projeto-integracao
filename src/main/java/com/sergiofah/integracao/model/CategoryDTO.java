@@ -35,5 +35,4 @@ public class CategoryDTO {
     public void setCategory(String category) {
         this.category = category;
     }
-
 }

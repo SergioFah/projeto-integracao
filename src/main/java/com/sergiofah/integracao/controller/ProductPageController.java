@@ -51,21 +51,25 @@ public class ProductPageController {
 	private ImageView productImageView;
 
 	private Image loading;
-
 	private Long selectedLineId;
-
 	private List<LineDTO> lineDTOList;
 	private List<CategoryDTO> categoryDTOList;
 	private List<ProductDTO> productDTOList = new ArrayList<>();
-
+	private Service service;
+	private LineService lineService;
+	private CategoryService categoryService;
+	private ProductService productService;
 	public ProductPageController() {
         loading = new Image(getClass().getResourceAsStream("/images/loading.gif"));
     }
 
     @FXML
 	private void initialize() {
-		Service service = new Service();
-		LineService lineService = new LineService();
+		service = new Service();
+		lineService = new LineService();
+		categoryService = new CategoryService();
+		productService = new ProductService();
+
 		if (service.getServerStatus()) {
 			this.lineDTOList = lineService.getLines();
 			populateComboBox();
@@ -86,15 +90,14 @@ public class ProductPageController {
 				.map(LineDTO::getId)
 				.findFirst()
 				.get();
+
 		populateTreeView();
 		modelsTitledPane.setDisable(false);
 		modelsTitledPane.setExpanded(true);
 	}
 	
 	private void populateTreeView() {
-		CategoryService categoryService = new CategoryService();
-		ProductService productService = new ProductService();
-    	this.categoryDTOList = categoryService.getCategoriesFromLineId(selectedLineId);
+		this.categoryDTOList = categoryService.getCategoriesFromLineId(selectedLineId);
 		TreeItem<String> rootItem = new TreeItem<>();
         modelsTreeView.setRoot(rootItem);
         modelsTreeView.setShowRoot(false);
@@ -113,7 +116,6 @@ public class ProductPageController {
 	}
 
 	private void selectionTreeViewHandler() {
-		ProductService productService = new ProductService();
 		modelsTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if ((newValue != null) && (newValue.isLeaf())) {
             	String selectedModel = newValue.getValue();
@@ -129,7 +131,6 @@ public class ProductPageController {
 		productDescLabel.setText(p.getDescription());
 		productImageView.setImage(loading);
 		modelDetailsAnchorPane.setVisible(true);
-
 
         Thread loadImage = new Thread(() -> {
     		try {
