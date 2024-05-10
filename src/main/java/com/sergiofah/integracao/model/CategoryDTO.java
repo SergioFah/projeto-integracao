@@ -7,6 +7,15 @@ public class CategoryDTO {
     private LineDTO line;
     private String category;
 
+    public CategoryDTO() {
+    }
+
+    public CategoryDTO(Long id, LineDTO line, String category) {
+        this.id = id;
+        this.line = line;
+        this.category = category;
+    }
+
     public Long getId() {
         return id;
     }
