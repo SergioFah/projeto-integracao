@@ -35,7 +35,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox fx:id="linesComboBox" layoutX="203.0" layoutY="30.0" onAction="#OnClickComboBox" prefWidth="150.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
+                                          <ComboBox fx:id="linesComboBox" layoutX="203.0" layoutY="30.0" onAction="#onClickComboBox" prefWidth="150.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="18.0" />
                                        </children>
                                     </AnchorPane>
                                  </content>

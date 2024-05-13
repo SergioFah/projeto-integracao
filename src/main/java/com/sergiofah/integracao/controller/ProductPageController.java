@@ -1,5 +1,6 @@
 package com.sergiofah.integracao.controller;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -81,10 +82,11 @@ public class ProductPageController {
 
 	public void populateComboBox() {
 		linesComboBox.setItems(FXCollections.observableArrayList(lineDTOList.stream().map(LineDTO::getLine).collect(Collectors.toList())));
-		linesComboBox.valueProperty().addListener(((observable, oldValue, newValue) -> onClickComboBox(newValue)));
 	}
 
-	public void onClickComboBox(String selectedLine) {
+	@FXML
+	public void onClickComboBox() {
+		String selectedLine = linesComboBox.getValue();
 		selectedLineId = lineDTOList.stream()
 				.filter(id -> id.getLine().equals(selectedLine))
 				.map(LineDTO::getId)
@@ -107,7 +109,6 @@ public class ProductPageController {
 			rootItem.getChildren().add(newCategory);
 			List<ProductDTO> productsFromCategory = productService.getProductsFromCategoryId(c.getId());
 			this.productDTOList.addAll(productsFromCategory);
-
 			for (ProductDTO p : productsFromCategory) {
 				newCategory.getChildren().add(new TreeItem<>(p.getModel()));
 			}
