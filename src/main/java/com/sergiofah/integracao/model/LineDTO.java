@@ -6,6 +6,14 @@ public class LineDTO {
     private Long id;
     private String line;
 
+    public LineDTO(Long id, String line) {
+        this.id = id;
+        this.line = line;
+    }
+
+    public LineDTO() {
+    }
+
     public Long getId() {
         return id;
     }

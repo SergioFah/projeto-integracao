@@ -10,6 +10,18 @@ public class ProductDTO {
     private String description;
     private String imageUrl;
 
+    public ProductDTO(Long id, LineDTO line, CategoryDTO category, String model, String description, String imageUrl) {
+        this.id = id;
+        this.line = line;
+        this.category = category;
+        this.model = model;
+        this.description = description;
+        this.imageUrl = imageUrl;
+    }
+
+    public ProductDTO() {
+    }
+
     public Long getId() {
         return id;
     }
